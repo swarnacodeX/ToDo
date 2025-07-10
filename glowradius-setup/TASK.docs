@@ -1,0 +1,55 @@
+PROJECT STRUCTURE
+
+
+project-root/
+├── app.js             
+├── routes/
+│   └── items.js
+├── middleware/
+│   └── auth.js            
+├── data/
+│   └── items.js          
+├── package.json           
+
+AUTHENTICATION
+All routes under '/api/items' are protected using a custom middleware that checks for an Authorization header with a hardcoded token:
+Bearer Token:mysecrettoken
+
+ POST /api/items  #create a new items
+ {
+    "id":6,
+    "name": "Orange",
+    "price": 50
+}
+
+ GET /api/items
+ Headers:
+Authorization: Bearer mysecrettoken
+Response Header:
+X-Custom-Header: HelloWorld
+
+Description: Get all items.
+
+[{"id":1,"name":"Apple","price":50},{"id":2,"name":"Banana","price":30},{"id":3,"name":"Samsung","price":20},{"id":4,"name":"Orange","price":50}]
+
+
+GET /api/items/:id
+Description: Get an item by its ID.
+
+Response:
+{"id":1,"name":"Apple","price":50}
+200 OK with item data, or 404 Not Found if not found.
+
+PUT /api/items/:id
+{
+    "id":1,
+  "name": "Lenovo",
+  "price": 50
+}
+
+Response:
+{"id":1,"name":"Lenovo","price":50}
+Description: Update an item by ID.
+
+DELETE /api/items/:id
+Description: Delete an item by ID.
